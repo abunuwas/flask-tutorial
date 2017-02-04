@@ -4,3 +4,4 @@ venv
 app.db
 .env
 tmp
+log
