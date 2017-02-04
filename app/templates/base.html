@@ -13,8 +13,9 @@
 	<div>Microblog:
 		<a href="/index">Home</a>
 		{% if g.user.is_authenticated %}
+		| <a href="{{ url_for('user', nickname=g.user.nickname) }}">Your Profile</a>
 		| <a href="{{ url_for('logout') }}">Logout</a>
-		{% enfif %}
+		{% endif %}
 	</div>
 	<hr>
 	{% with messages = get_flashed_messages() %}
