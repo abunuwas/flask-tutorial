@@ -24,5 +24,13 @@
     {% for post in posts.items %}
         {% include 'post.html' %}
     {% endfor %}
-    {% include 'posts_paginate.html' %}
-{% endblock %}
+    {% if posts.has_prev %}
+        <a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Newer posts </a>
+    {% else %}
+        &lt;&lt; Newer posts
+    {% endif %}
+    {% if posts.has_next %}
+        <a href="{{ url_for('index', page=posts.next_num) }}"> Older posts &gt;&gt;</a>
+    {% else %}
+        Older posts &gt;&gt;
+{% endif %}{% endblock %}

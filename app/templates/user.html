@@ -10,7 +10,7 @@
                 {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
                 {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
                 <p>
-                    {{ user.followers.count() }} followers |
+                    {{ user.followers.count() -1 }} followers |
                     {{ user.followed.count() - 1 }} following |
                     {% if user.id == g.user.id %}
                         <a href="{{ url_for('edit') }}">Edit your profile</a>
@@ -28,5 +28,14 @@
     {% for post in posts.items %}
         {% include 'post.html' %}
     {% endfor %}
-    {% include 'posts_paginate.html' %}
+    {% if posts.has_prev %}
+        <a href="{{ url_for('user', nickname=g.user.nickname, page=posts.prev_num) }}">&lt;&lt; Newer posts </a>
+    {% else %}
+        &lt;&lt; Newer posts
+    {% endif %}
+    {% if posts.has_next %}
+        <a href="{{ url_for('user', nickname=g.user.nickname, page=posts.next_num) }}"> Older posts &gt;&gt;</a>
+    {% else %}
+        Older posts &gt;&gt;
+    {% endif %}
 {% endblock %}
