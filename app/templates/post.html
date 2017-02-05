@@ -2,8 +2,9 @@
     <tr valign="top">
         <td><img src="{{ post.author.avatar(50) }}"></td>
         <td>
-            <i>{{ post.author.nickname }} says:</i><br>
-            {{ post.body }}
+            <i>{{ post.author.nickname }} said:</i><br>
+            <small><i>{{ post.timestamp }}</i></small>
+            <div>{{ post.body }}</div>
         </td>
     </tr>
 </table>

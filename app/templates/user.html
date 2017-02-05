@@ -11,7 +11,7 @@
                 {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
                 <p>
                     {{ user.followers.count() }} followers |
-                    {{ user.followed.count() }} following | 
+                    {{ user.followed.count() - 1 }} following |
                     {% if user.id == g.user.id %}
                         <a href="{{ url_for('edit') }}">Edit your profile</a>
                     {% elif not g.user.is_following(user) %}
@@ -25,7 +25,8 @@
         </tr>
     </table>
     <hr>
-    {% for post in posts %}
+    {% for post in posts.items %}
         {% include 'post.html' %}
     {% endfor %}
+    {% include 'posts_paginate.html' %}
 {% endblock %}
