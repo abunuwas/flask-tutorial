@@ -6,3 +6,4 @@ app.db
 tmp
 log
 test.db
+whoosh_index
