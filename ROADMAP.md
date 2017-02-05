@@ -1,3 +1,25 @@
+BUGS
+===
+
+1. Usernames are case-sensitive. That shouldn't matter.
+juan should be same as Juan or jUan or JUAN etc.
+
+2. Important fields are not enforced when committing
+to database. In user, for example, nickname and 
+email should be present before committing. 
+
+3. Timestamps should be added automatically in the db,
+not in the code.
+
+4. a last_changed field is missing in every model which
+also should be automatically updated. A create method
+is also missing. The create method would allow inserting
+entities in the database without have to do the 
+db.session.add(x); db.session.commit journey. 
+
+5. 
+
+
 TODO
 ===
 
