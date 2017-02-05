@@ -1,6 +1,9 @@
 from hashlib import md5
 
-from app import db
+import flask_whooshalchemy as whooshalchemy
+
+from app import db, app
+
 
 followers = db.Table("followers",
                      db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
@@ -79,6 +82,8 @@ class User(db.Model):
 
 
 class Post(db.Model):
+    __searchable__ = ['body']
+
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
     # timestamp should be added automatically
@@ -87,3 +92,5 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post %r>' % (self.body)
+
+whooshalchemy.whoosh_index(app, Post)

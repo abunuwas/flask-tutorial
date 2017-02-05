@@ -7,6 +7,8 @@ SECRET_KEY = 'you-will-never-guess'
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
+SQLALCHEMY_TRACK_MODIFICATIONS = True
+WOOSH_BASE = os.path.join(basedir, 'search.db')
 
 OPENID_PROVIDERS = [
     {'name': 'Google', 'url': 'https://www.google.com/accounts/o8/id'},
@@ -18,3 +20,7 @@ OPENID_PROVIDERS = [
 
 # pagination
 POSTS_PER_PAGE = 3
+
+# full text search
+MAX_SEARCH_RESULTS = 50
+
