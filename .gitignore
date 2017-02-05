@@ -5,3 +5,4 @@ app.db
 .env
 tmp
 log
+test.db
