@@ -17,7 +17,8 @@ is also missing. The create method would allow inserting
 entities in the database without have to do the 
 db.session.add(x); db.session.commit journey. 
 
-5. 
+5. Replaace custom async decorator for Python's standard
+asyn decorator. 
 
 
 TODO
