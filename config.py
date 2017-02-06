@@ -24,3 +24,6 @@ POSTS_PER_PAGE = 3
 # full text search
 MAX_SEARCH_RESULTS = 50
 
+ADMINS = [
+    'joseharoperalta@gmail.com'
+]
