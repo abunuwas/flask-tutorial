@@ -7,7 +7,7 @@
             {% autoescape false %}
             <p>
                 <a href="{{ url_for('user', nickname=post.author.nickname) }}">{{ post.author.nickname }}</a> said:<br/>
-                <small>{{ post.timestamp }}</small>
+                <small>{{ momentjs(post.timestamp).fromNow() }}</small>
             </p>
             {% endautoescape %}
             <p><strong><span id="post{{ post.id }}">{{ post.body }}</span></strong></p>
