@@ -1,41 +1,39 @@
 <!-- extend base layout -->
 {% extends "base.html" %}
-
 {% block content %}
-    <table>
-        <tr valign="top">
-            <td><img src="{{ user.avatar(128) }}"></td>
-            <td>
-                <h1>User: {{ user.nickname }}</h1>
-                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-                {% if user.last_seen %}<p><i>Last seen on: {{ user.last_seen }}</i></p>{% endif %}
-                <p>
-                    {{ user.followers.count() -1 }} followers |
-                    {{ user.followed.count() - 1 }} following |
-                    {% if user.id == g.user.id %}
-                        <a href="{{ url_for('edit') }}">Edit your profile</a>
-                    {% elif not g.user.is_following(user) %}
-                        <a href="{{ url_for('follow', nickname=user.nickname) }}">Follow</a>
-                    {% else %}
-                        <a href="{{ url_for('unfollow', nickname=user.nickname) }}">Unfollow</a>
-                    {% endif %}
-                </p>
-
-            </td>
-        </tr>
-    </table>
-    <hr>
-    {% for post in posts.items %}
-        {% include 'post.html' %}
-    {% endfor %}
+{% include 'flash.html' %}
+<div class="well well-lg">
+    <div class="pull-right">
+        <img src="{{ user.avatar(128) }}" class="img-polaroid">
+    </div>
+    <h1>{{ user.nickname }}</h1>
+    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+    {% if user.last_seen %}<p><em>Last seen on: {{ user.last_seen }}</em></p>{% endif %}
+    <p>
+        Followers: {{ user.followers.count() -1 }} |
+        Following: {{ user.followed.count() -1 }} |
+        {% if user.id == g.user.id %}
+            <a href="{{ url_for('edit', nickname=user.nickname) }}">Edit your profile</a>
+        {% elif not g.user.is_following(user) %}
+            <a href="{{ url_for('follow', nickname=user.nickname) }}">Follow</a>
+        {% else %}
+            <a href="{{ url_for('unfollow', nickname=user.nickname) }}">Unfollow</a>
+        {% endif %}
+    </p>
+</div>
+{% for post in posts.items %}
+    {% include 'post.html' %}
+{% endfor %}
+<url class="pager">
     {% if posts.has_prev %}
-        <a href="{{ url_for('user', nickname=g.user.nickname, page=posts.prev_num) }}">&lt;&lt; Newer posts </a>
+    <li class="previous"><a href="{{ url_for('user', nickname=user.nickname, page=posts.prev_num) }}">Newer posts</a></li>
     {% else %}
-        &lt;&lt; Newer posts
+    <li class="previous disabled"><a href="#">Newer posts</a></li>
     {% endif %}
     {% if posts.has_next %}
-        <a href="{{ url_for('user', nickname=g.user.nickname, page=posts.next_num) }}"> Older posts &gt;&gt;</a>
+    <li class="next"><a href="{{ url_for('user', nickname=user.nickname, page=posts.next_num) }}">Older posts</a></li>
     {% else %}
-        Older posts &gt;&gt;
+    <li class="next disabled"><a href="#">Older posts</a></li>
     {% endif %}
+</url>
 {% endblock %}
