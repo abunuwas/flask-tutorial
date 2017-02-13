@@ -1,0 +1,14 @@
+[Unit]
+Description=gunicorn daemon for flaskMegaTutorial app
+After=network.target
+
+[Service]
+PIDFile=/run/flaskMegaTutorial/pid
+User=osboxes
+Group=www-data
+WorkingDirectory=/home/osboxes/Projects/flaskMegaTutorial
+ExecStart=/home/osboxes/Projects/flaskMegaTutorial/run_with_gunicorn.sh
+PrivateTmp=True
+
+[Install]
+WantedBy=multi-user.target
